@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Header } from '../components/Header';
@@ -9,11 +9,13 @@ export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
-    setTasks([...tasks, {
-      id: Math.floor(Math.random() * 10000),
-      title: newTaskTitle,
-      done: false
-    }]);
+    if (newTaskTitle !== "") {
+      setTasks([...tasks, {
+        id: Math.floor(Math.random() * 10000),
+        title: newTaskTitle,
+        done: false
+      }]);
+    }
   }
 
   function handleToggleTaskDone(id: number) {
