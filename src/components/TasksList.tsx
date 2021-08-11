@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Image, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
+import { FlatList, Image, TouchableOpacity, View, Text, StyleSheet, FlatListProps, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { ItemWrapper } from './ItemWrapper';
@@ -65,7 +65,22 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
             <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
-              onPress={() => removeTask(item.id)}
+              onPress={() => 
+                Alert.alert(
+                  "Remover item",
+                  "Tem certeza que deseja remover esse item?",
+                  [
+                    {
+                      text: "Não",
+                      style: "cancel",
+                    },
+                    {
+                      text: "Sim",
+                      onPress: () => removeTask(item.id)
+                    }
+                  ]
+                )
+              }
             >
               <Image source={trashIcon} />
             </TouchableOpacity>
